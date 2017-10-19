@@ -1,0 +1,6 @@
+public class     vaicalon {
+	string        ss; // heelo
+	string   dmm;
+
+	public boolean vl {}
+}
