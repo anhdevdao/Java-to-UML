@@ -1,13 +1,14 @@
 import java.io.IOException;
+import java.lang.StringIndexOutOfBoundsException;
 
 
 public class Test {
     public static void main(String[] args) throws IOException {
         String str = "";
         ReadFile rf = new ReadFile();
-        Find f = new Find();
         str = rf.readFile();
         System.out.println(str);
-        f.findClassName(str);
+        Find f = new Find();
+        f.nameClass(str);
     }
 }
