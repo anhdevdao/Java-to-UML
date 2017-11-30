@@ -1,0 +1,27 @@
+public String deleteString(String s) {
+		String s1= s;
+		int i1 = s.indexOf("{");
+		int i2 = s.indexOf("{", i1+1);
+		int tmp = 0, tmp2;
+		int count =0;
+		String str;
+		for (int i=i2; i <s.length(); i++){
+			if(i ==-1) break;
+			if(count==0) {
+				tmp = i;
+			}
+			if(s.charAt(i) == '{') {
+                count++;
+            }
+			if(s.charAt(i) == '}') {
+		        count--;
+		        if(count ==0) {
+		            tmp2=i;	      
+		            i = s.indexOf("{", tmp2)-1;
+                    str = s.substring(tmp, tmp2+1);
+                    s1= s1.replace(str, "");
+                }
+            }
+        }
+		return s1;
+	}
