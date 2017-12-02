@@ -3,6 +3,7 @@ package JavaToUML;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.regex.PatternSyntaxException;
 
 public class ReadFile {
     public String optimizeCodeMini(String s) {
@@ -25,7 +26,7 @@ public class ReadFile {
                     tmp2 = i;
                     try {
                         i = s.indexOf("{", tmp2)-1;
-                        str = s.substring(tmp + 1, tmp2);
+                        str = s.substring(tmp + 1, tmp2 - 1);
                         s1 = s1.replace(str, "");
                     } catch (StringIndexOutOfBoundsException st) {
                         st.getMessage();
@@ -57,7 +58,7 @@ public class ReadFile {
                     tmp2 = i;
                     try {
                         i = str.indexOf("{", tmp2) - 1;
-                        s = str.substring(tmp + 1, tmp2);
+                        s = str.substring(tmp + 1, tmp2 - 1);
                         s1 = s1.replace(s, rf.optimizeCodeMini(s));
                     } catch (StringIndexOutOfBoundsException st) {
                         st.getMessage();
@@ -79,17 +80,16 @@ public class ReadFile {
             String line = "";
             int count = 0;
             while ((line = br.readLine()) != null) {
-
+                s += line;
                 s = s.replace("{", " {");
                 s = s.replace("(", " (");
-                s = s.replace("} ", "}");
-                s = s.replace(") ", ")");
-                s = s.replace(" }", "} ");
+                s = s.replace(";", "; ");
                 s = s.replace(" )", ") ");
+                s = s.replace(" }", "} ");
                 s = s.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)", "");
                 s = s.replaceAll("\\s+", " ");
                 s = s.trim();
-                s += line;
+
             }
         } catch (IOException e) {
             e.printStackTrace();
@@ -101,13 +101,7 @@ public class ReadFile {
                 e.printStackTrace();
             }
         }
-        s = s.replace("{", " {");
-        s = s.replace("(", " (");
-        s = s.replace("} ", "}");
-        s = s.replace(") ", ")");
-        s = s.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)", "");
-        s = s.replaceAll("\\s+", " ");
-        s = s.trim();
+
         s = r.optimizeCode(s);
         return s;
     }

@@ -7,7 +7,7 @@ public class Find {
         System.out.println("Class's Names: ");
         int i1 = s.indexOf("class");
         for (int i=i1; i< s.length(); i++) {
-            if (i ==-1) break;
+            if (i == -1) break;
             int i2 = s.indexOf(" ", i+6);
             String tmp = s.substring(i +6,  i2).replace("{", "");
             i = s.indexOf("class", i+1) -1;
@@ -96,14 +96,14 @@ public class Find {
     }
 
 
-    public void nameMethod(String s) {
+    public void nameMethod(String s) throws StringIndexOutOfBoundsException {
         System.out.println("Method names: ");
         int i = s.indexOf("(");
         while (i!=-1) {
             int tmp2 = s.lastIndexOf(" ", i);
             int tmp3 = s.lastIndexOf(" ", tmp2-1);
             int tmp4 = s.indexOf("{", i);
-            System.out.println("+ " + s.substring(tmp3+1, tmp4-1));
+            System.out.println("+ " + s.substring(tmp3 + 1, tmp4 - 1));
             i = s.indexOf("(", tmp4);
         }
     }

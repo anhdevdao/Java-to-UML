@@ -1,114 +1,178 @@
-package JavaToUML;
-
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.IOException;
-
-public class ReadFile {
-    public String optimizeCodeMini(String s) {
-        String s1 = s;
-        int i1 = s.indexOf("{");
-        int tmp = 0, tmp2;
-        int count = 0;
-        String str;
-        for (int i = i1; i < s.length(); i++) {
-            if (i == -1) break;
-            if (count == 0) {
-                tmp = i;
-            }
-            if (s.charAt(i) == '{') {
-                count++;
-            }
-            if (s.charAt(i) == '}') {
-                count--;
-                if (count == 0) {
-                    tmp2 = i;
-                    try {
-                        i = s.indexOf("{", tmp2)-1;
-                        str = s.substring(tmp + 1, tmp2);
-                        s1 = s1.replace(str, "");
-                    } catch (StringIndexOutOfBoundsException st) {
-                        st.getMessage();
-                    }
-                }
-            }
-        }
-        return s1;
+//Lop Shape
+class Shape {
+    protected String color;
+    protected boolean filled;
+    //Ham khoi tao
+    public Shape() { 
     }
 
-    public String optimizeCode(String str) {
-        ReadFile rf = new ReadFile();
-        String s1 = str;
-        int i1 = str.indexOf("{");
-        int tmp = 0, tmp2;
-        int count = 0;
-        String s;
-        for (int i = i1; i < str.length(); i++) {
-            if (i == -1) break;
-            if (count == 0) {
-                tmp = i;
-            }
-            if (str.charAt(i) == '{') {
-                count++;
-            }
-            if (str.charAt(i) == '}') {
-                count--;
-                if (count == 0) {
-                    tmp2 = i;
-                    try {
-                        i = str.indexOf("{", tmp2) - 1;
-                        s = str.substring(tmp + 1, tmp2);
-                        s1 = s1.replace(s, rf.optimizeCodeMini(s));
-                    } catch (StringIndexOutOfBoundsException st) {
-                        st.getMessage();
-                    }
-                }
-            }
-        }
-        return s1;
+    public Shape(String coler, boolean filled) {
+        this.color = color;
+        this.filled = filled;
+    }
+    //Cac ham setter, getter
+    public void setColor(String color) {
+        this.color = color;
     }
 
-    public String readFile() {
-        String s = "";
-        BufferedReader br = null;
-        FileReader fr = null;
-        ReadFile r = new ReadFile();
-        try {
-            fr = new FileReader("test.txt");
-            br = new BufferedReader(fr);
-            String line = "";
-            int count = 0;
-            while ((line = br.readLine()) != null) {
+    public String getColor() {
+        return color;
+    }
 
-                s = s.replace("{", " {");
-                s = s.replace("(", " (");
-                s = s.replace("} ", "}");
-                s = s.replace(") ", ")");
-                s = s.replace(" }", "} ");
-                s = s.replace(" )", ") ");
-                s = s.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)", "");
-                s = s.replaceAll("\\s+", " ");
-                s = s.trim();
-                s += line;
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-            try {
-                if (fr != null) fr.close();
-                if (br != null) br.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-        s = s.replace("{", " {");
-        s = s.replace("(", " (");
-        s = s.replace("} ", "}");
-        s = s.replace(") ", ")");
-        s = s.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)", "");
-        s = s.replaceAll("\\s+", " ");
-        s = s.trim();
-        s = r.optimizeCode(s);
-        return s;
+    public boolean isFilled() {
+        return filled;
+    }
+
+    public void setFilled(boolean filled) {
+        this.filled = filled;
+    }
+
+    public String toString() {
+        return super.toString();
     }
 }
+//Lop Hinh tron
+class Circle extends Shape {
+    final double PI = 3.141592;
+    private double radius;
+    // Ham khoi tao
+    public Circle() {
+    }
+
+    public Circle(double r) {
+        this.radius = r;
+    }
+
+    public Circle(double r, String c, boolean f) {
+        this.radius = r;
+        this.color = c;
+        this.filled = f;
+    }
+    //Cac ham setter, getter
+    public double getRadius() {
+        return radius;
+    }
+
+    public void setRadius(double radius) {
+        this.radius = radius;
+    }
+    //Ham tinh dien tich hinh tron
+    public double getArea() {
+        return PI*radius*radius;
+    }
+    //Ham tinh chu vi hinh tron
+    public double getPerimeter() {
+        return 2*PI*radius;
+    }
+
+    public String toString() {
+        return super.toString();
+    }
+}
+//Lop Hinh chu nhat
+class Rectangle extends Shape {
+    protected double width;
+    protected double length;
+    //Ham khoi tao
+    public Rectangle() {}
+
+    public Rectangle(double w, double l) {
+        this.width = w;
+        this.length = l;
+    }
+
+    public Rectangle(double w, double l, String c, boolean f) {
+        this.width = w;
+        this.length = l;
+        this.color = c;
+        this.filled = f;
+    }
+    //Cac ham setter, getter
+    public double getWidth() {
+        return width;
+    }
+
+    public void setWidth(double width) {
+        this.width = width;
+    }
+
+    public double getLength() {
+        return length;
+    }
+
+    public void setLength(double length) {
+        this.length = length;
+    }
+    //Ham tinh dien tich hinh chu nhat
+    public double getArea() {
+        return width*length;
+    }
+    //Ham tinh chu vi hinh chu nhat
+    public double getPerimeter() {
+        return (width+length)*2;
+    }
+
+    public String toString() {
+        return super.toString();
+    }
+}
+//Lop Hinh vuong
+class Square extends Rectangle {
+    private double side;
+    //Ham khoi tao
+    public Square() {
+    }
+
+    public Square(double s) {
+        this.width = this.length = s;
+    }
+
+    public Square(double s, String c, boolean f) {
+        this.width = this.length = s;
+        this.color = c;
+        this.filled = f;
+    }
+    //Cac ham setter, getter
+    public double getSide() {
+        return side;
+    }
+
+    public void setSide(double side) {
+        this.side = side;
+    }
+
+    public void setWidth(double side) {
+        super.setWidth(side);
+    }
+
+    public void setLength(double side) {
+        super.setLength(side);
+    }
+
+    public String toString() {
+        return super.toString();
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Shape s = new Shape("blue", true);
+
+        Square sq = new Square(25);
+        System.out.println(sq.getArea());
+        System.out.println(sq.getPerimeter());
+
+        Circle c = new Circle(5);
+        System.out.println(c.getArea());
+        System.out.println(c.getPerimeter());
+
+        Rectangle r = new Rectangle(30, 65);
+        System.out.println(r.getPerimeter());
+        System.out.println(r.getArea());
+    }
+}
+
+
+
+
+
