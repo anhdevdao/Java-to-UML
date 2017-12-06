@@ -1,26 +1,26 @@
 package JavaToUML;
 
-import JavaToUML.Find;
-import JavaToUML.ReadFile;
+import java.io.File;
 
-import java.io.IOException;
-
-
-
-public class Test {
+class Test {
     public static void main(String[] args) {
         String str = "";
         try {
+            File folder = new File(str);
             ReadFile rf = new ReadFile();
+            ReadFolder rf2 = new ReadFolder();
+            //str = rf2.InputFile(folder);
             str = rf.readFile();
             System.out.println(str);
             Find f = new Find();
             f.nameClass(str);
+            //f.nameInterface(str);
             f.namePackage(str);
-            f.nameMethod(str);
+            //f.nameMethod(str);
             f.nameAttribute(str);
         } catch (StringIndexOutOfBoundsException st) {
             st.printStackTrace();
         }
     }
 }
+

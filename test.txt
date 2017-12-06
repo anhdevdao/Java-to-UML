@@ -1,178 +1,85 @@
-//Lop Shape
-class Shape {
-    protected String color;
-    protected boolean filled;
-    //Ham khoi tao
-    public Shape() { 
-    }
-
-    public Shape(String coler, boolean filled) {
-        this.color = color;
-        this.filled = filled;
-    }
+//Lop Hoa qua
+class HoaQua {
+    private String name, color;
+    private double weight;
     //Cac ham setter, getter
-    public void setColor(String color) {
-        this.color = color;
+    public String getName() { return name; }
+
+    public void setName(String n) { name = n; }
+
+    public String getColor() { return color; }
+
+    public void setColor(String c) { color = c; }
+
+    public double getWeight() { return weight; }
+
+    public void setWeight(double w) { weight = w; }
+
+
+}
+//Lop qua cam
+class QuaCam extends HoaQua {
+    private boolean pieces;
+    private String province, importDay;
+    private int price, numbers;
+    //Cac ham setter, getter
+    public boolean getPieces() { return true; }
+
+    public String getProvince() { return province; }
+    public void setProvince(String p) { province = p; }
+
+    public int getPrice() { return price; }
+    public void setPrice(int pr) {
+        price = pr;
     }
 
-    public String getColor() {
-        return color;
+    public int getNumbers() {
+        return numbers;
+    }
+    public void setNumbers(int n) {
+        numbers = n;
     }
 
-    public boolean isFilled() {
-        return filled;
+    public String getImportDay() {
+        return importDay;
     }
-
-    public void setFilled(boolean filled) {
-        this.filled = filled;
-    }
-
-    public String toString() {
-        return super.toString();
+    public void setImportDay(String d) {
+        importDay = d;
     }
 }
-//Lop Hinh tron
-class Circle extends Shape {
-    final double PI = 3.141592;
-    private double radius;
-    // Ham khoi tao
-    public Circle() {
-    }
-
-    public Circle(double r) {
-        this.radius = r;
-    }
-
-    public Circle(double r, String c, boolean f) {
-        this.radius = r;
-        this.color = c;
-        this.filled = f;
-    }
+//Lop qua tao
+class QuaTao extends HoaQua{
+    private String taste;
     //Cac ham setter, getter
-    public double getRadius() {
-        return radius;
+    public String getTaste() {
+        return taste;
     }
-
-    public void setRadius(double radius) {
-        this.radius = radius;
-    }
-    //Ham tinh dien tich hinh tron
-    public double getArea() {
-        return PI*radius*radius;
-    }
-    //Ham tinh chu vi hinh tron
-    public double getPerimeter() {
-        return 2*PI*radius;
-    }
-
-    public String toString() {
-        return super.toString();
+    public void setTaste(String t) {
+        taste = t;
     }
 }
-//Lop Hinh chu nhat
-class Rectangle extends Shape {
-    protected double width;
-    protected double length;
-    //Ham khoi tao
-    public Rectangle() {}
-
-    public Rectangle(double w, double l) {
-        this.width = w;
-        this.length = l;
-    }
-
-    public Rectangle(double w, double l, String c, boolean f) {
-        this.width = w;
-        this.length = l;
-        this.color = c;
-        this.filled = f;
-    }
-    //Cac ham setter, getter
-    public double getWidth() {
-        return width;
-    }
-
-    public void setWidth(double width) {
-        this.width = width;
-    }
-
-    public double getLength() {
-        return length;
-    }
-
-    public void setLength(double length) {
-        this.length = length;
-    }
-    //Ham tinh dien tich hinh chu nhat
-    public double getArea() {
-        return width*length;
-    }
-    //Ham tinh chu vi hinh chu nhat
-    public double getPerimeter() {
-        return (width+length)*2;
-    }
-
-    public String toString() {
-        return super.toString();
-    }
-}
-//Lop Hinh vuong
-class Square extends Rectangle {
-    private double side;
-    //Ham khoi tao
-    public Square() {
-    }
-
-    public Square(double s) {
-        this.width = this.length = s;
-    }
-
-    public Square(double s, String c, boolean f) {
-        this.width = this.length = s;
-        this.color = c;
-        this.filled = f;
-    }
-    //Cac ham setter, getter
-    public double getSide() {
-        return side;
-    }
-
-    public void setSide(double side) {
-        this.side = side;
-    }
-
-    public void setWidth(double side) {
-        super.setWidth(side);
-    }
-
-    public void setLength(double side) {
-        super.setLength(side);
-    }
-
-    public String toString() {
-        return super.toString();
-    }
-}
+//Lop cam cao phong
+class CamCaoPhong extends QuaCam {}
+//Lop CamSanh
+class CamSanh extends QuaCam {}
 
 public class Main {
     public static void main(String[] args) {
-        Shape s = new Shape("blue", true);
+        CamCaoPhong cp = new CamCaoPhong();
+        cp.setName("CamCaoPhong");
+        cp.setColor("Orange");
+        cp.setWeight(0.3);
+        cp.setProvince("Hoa Binh");
+        cp.setNumbers(500);
+        cp.setPrice(20000);
+        cp.setImportDay("15/10/2017");
 
-        Square sq = new Square(25);
-        System.out.println(sq.getArea());
-        System.out.println(sq.getPerimeter());
-
-        Circle c = new Circle(5);
-        System.out.println(c.getArea());
-        System.out.println(c.getPerimeter());
-
-        Rectangle r = new Rectangle(30, 65);
-        System.out.println(r.getPerimeter());
-        System.out.println(r.getArea());
+        System.out.println(cp.getName());
+        System.out.println(cp.getColor());
+        System.out.println(cp.getWeight());
+        System.out.println(cp.getProvince());
+        System.out.println(cp.getNumbers());
+        System.out.println(cp.getPrice());
+        System.out.println(cp.getImportDay());
     }
 }
-
-
-
-
-

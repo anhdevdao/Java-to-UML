@@ -1,19 +1,18 @@
 package JavaToUML;
 
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.PrintStream;
 
 public class WriteToFile {
-    private static final String FILENAME = "data.txt";
 
-    public static void writeFile(String[] args) {
-        try (BufferedWriter bw = new BufferedWriter(new FileWriter(FILENAME))) {
-            String content = "Nội dung mình muốn viết vào file\n";
-            bw.write(content);
-            System.out.println("Xong");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+    public static void writeFile(String path) throws FileNotFoundException {
+        Test t = new Test();
+        File f = new File(".\\diagram.txt");
+        FileOutputStream fos = new FileOutputStream(f);
+        PrintStream ps = new PrintStream(fos);
+        System.setOut(ps);
+        //t.main(path);
     }
 }
