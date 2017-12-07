@@ -25,6 +25,11 @@ public class ReadFile {
                 s = s.replace("(", " (");
                 s = s.replace(" ;", "; ");
                 s = s.replace(" )", ") ");
+
+                s = s.replace(") ", ")");
+                s = s.replace("\"", " \" ");
+                s = s.replace(" = ", "=");
+                s = s.replace("}}", "} }");
                 s = s.replaceAll("(?:/\\*(?:[^*]|(?:\\*+[^*/]))*\\*+/)|(?://.*)", "");
                 s = s.replaceAll("\\s+", " ");
                 s = s.trim();
@@ -40,7 +45,7 @@ public class ReadFile {
                 e.printStackTrace();
             }
         }
-        f.optimizeCode(s);
+        s = f.optimizeCode(s);
         return s;
     }
 }
